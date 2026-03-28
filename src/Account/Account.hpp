@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Client/Client.hpp"
 
 class Account{
