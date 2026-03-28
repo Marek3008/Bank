@@ -83,3 +83,14 @@ Account* Bank::CreateAccount(int n, Client* c, Client* p){
 Account* Bank::CreateAccount(int n, Client* c, Client* p, double ir){
     return StoreAccount(new Account(n, c, p, ir));
 }
+
+void Bank::PrintClients(){
+    std::cout << "List klientov:" << std::endl;
+
+    for(int i = 0; i < this->clientsCount; i++){
+        if(clients[i] == nullptr) std::cout << "\tID: <prázdne>; Meno: <prázdne>" << std::endl;
+        else std::cout << "\tID: " << clients[i]->GetCode() << "; Meno: " << clients[i]->GetName() << std::endl;
+    }
+}
+
+//void Bank::AddInterest();

@@ -8,8 +8,7 @@ int main(void){
 
     Client* client = bank->CreateClient(123, "Marek Baňas");
     
-    if(bank->GetClient(124) != nullptr) std::cout << bank->GetClient(123)->GetName() << std::endl;
-    else std::cout << "Klient sa nenašiel" << std::endl;
+    bank->PrintClients();
     
     return 0;
 }

@@ -24,5 +24,7 @@ class Bank{
         Account* CreateAccount(int n, Client* c, Client* p);
         Account* CreateAccount(int n, Client* c, Client* p, double ir);
 
+        void PrintClients();
+        void PrintAccounts();
         void AddInterest();
 };
