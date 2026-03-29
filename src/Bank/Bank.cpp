@@ -88,9 +88,33 @@ void Bank::PrintClients(){
     std::cout << "List klientov:" << std::endl;
 
     for(int i = 0; i < this->clientsCount; i++){
-        if(clients[i] == nullptr) std::cout << "\tID: <prázdne>; Meno: <prázdne>" << std::endl;
+        if(clients[i] == nullptr) std::cout << "\t<prázdne>" << std::endl;
         else std::cout << "\tID: " << clients[i]->GetCode() << "; Meno: " << clients[i]->GetName() << std::endl;
+    }
+    
+    std::cout << std::endl;
+}
+
+void Bank::PrintAccounts(){
+    std::cout << "List účtov:" << std::endl;
+
+    for(int i = 0; i < this->accountsCount; i++){
+        if(accounts[i] == nullptr) std::cout << "\t<prázdne>" << std::endl;
+        else{
+            std::cout << "\tID: " << accounts[i]->GetNumber() << std::endl;
+            std::cout << "\t\t" << "Vlastník: " << accounts[i]->GetOwner()->GetCode() << " (" << accounts[i]->GetOwner()->GetName() << ")" << std::endl;
+            
+            std::cout << "\t\tSpoluvlastník: ";
+            if(accounts[i]->GetPartner() == nullptr) std::cout << "<prázdne>" << std::endl;
+            else std::cout << accounts[i]->GetPartner()->GetCode() << " (" << accounts[i]->GetPartner()->GetName() << ")" << std::endl;
+
+            //dorobit
+        } 
     }
 }
 
-//void Bank::AddInterest();
+void Bank::AddInterest(){
+    for(int i = 0; i < this->accountsCount; i++){
+        if(accounts[i] != nullptr) accounts[i]->AddInterest();
+    }
+}

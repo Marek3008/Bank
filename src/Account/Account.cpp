@@ -3,12 +3,14 @@
 Account::Account(int n, Client* c){
     this->number = n;
     this->owner = c;
+    this->partner = nullptr;
 }
 
 Account::Account(int n, Client* c, double ir){
     this->number = n;
     this->owner = c;
     this->interestRate = ir;
+    this->partner = nullptr;
 }
 
 Account::Account(int n, Client* c, Client* p){
@@ -56,4 +58,8 @@ void Account::Deposit(double balance){
 
 void Account::Withdraw(double balance){
     this->balance -= balance;
+}
+
+void Account::AddInterest(){
+    this->balance += this->balance * this->interestRate;
 }
