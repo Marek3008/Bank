@@ -5,8 +5,8 @@
 class Account{
     private:
         int number;
-        double balance;
-        double interestRate;
+        double balance = 0;
+        double interestRate = 0.01;
 
         Client* owner;
         Client* partner;
@@ -28,4 +28,6 @@ class Account{
         void Deposit(double balance);
         void Withdraw(double balance);
         void AddInterest();
+
+        void PrintAccount();
 };

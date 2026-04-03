@@ -1,4 +1,5 @@
 #include "Account.hpp"
+#include <iostream>
 
 Account::Account(int n, Client* c){
     this->number = n;
@@ -62,4 +63,15 @@ void Account::Withdraw(double balance){
 
 void Account::AddInterest(){
     this->balance += this->balance * this->interestRate;
+}
+
+void Account::PrintAccount(){
+    std::cout << "\tID: " << this->number << std::endl;
+    std::cout << "\t\t" << "Vlastník: " << this->owner->GetCode() << " (" << this->owner->GetName() << ")" << std::endl;
+    
+    std::cout << "\t\tSpoluvlastník: ";
+    if(this->partner == nullptr) std::cout << "<prázdne>" << std::endl;
+    else std::cout << this->partner->GetCode() << " (" << this->partner->GetName() << ")" << std::endl;
+
+    std::cout << "\t\tBilancia: " << this->balance << std::endl;
 }

@@ -1,4 +1,5 @@
 #include "Client.hpp"
+#include <iostream>
 
 Client::Client(int c, std::string n){
     this->code = c;
@@ -11,4 +12,8 @@ int Client::GetCode(){
 
 std::string Client::GetName(){
     return this->name;
+}
+
+void Client::PrintClient(){
+    std::cout << "\tID: " << this->code << "; Meno: " << this->name << std::endl;
 }

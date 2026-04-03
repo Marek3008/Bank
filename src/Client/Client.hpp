@@ -12,4 +12,5 @@ class Client{
 
         int GetCode();
         std::string GetName();
+        void PrintClient();
 };
