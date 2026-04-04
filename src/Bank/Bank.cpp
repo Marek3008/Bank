@@ -1,20 +1,20 @@
 #include "Bank.hpp"
 #include <iostream>
 
-Bank::Bank(int clientsCount, int accountsCount){
-    this->clientsCount = clientsCount;
-    this->accountsCount = accountsCount;
+Bank::Bank(int clientsCapacity, int accountsCapacity){
+    this->clientsCapacity = clientsCapacity;
+    this->accountsCapacity = accountsCapacity;
 
-    this->clients = new Client*[clientsCount]();
-    this->accounts = new Account*[accountsCount]();
+    this->clients = new Client*[clientsCapacity]();
+    this->accounts = new Account*[accountsCapacity]();
 }
 
 Bank::~Bank(){
-    for(int i = 0; i < clientsCount; i++){
+    for(int i = 0; i < this->clientsCapacity; i++){
         delete clients[i];
     }
 
-    for(int i = 0; i < accountsCount; i++){
+    for(int i = 0; i < this->accountsCapacity; i++){
         delete accounts[i];
     }
 
@@ -22,16 +22,16 @@ Bank::~Bank(){
     delete[] accounts;
 }
 
-Client* Bank::GetClient(int clientNumber){
-    for(int i = 0; i < this->clientsCount; i++){
+Client* Bank::GetClient(int clientNumber) const {
+    for(int i = 0; i < this->clientsCapacity; i++){
         if(clients[i] != nullptr && clients[i]->GetCode() == clientNumber) return clients[i];
     }
 
     return nullptr;
 }
 
-Account* Bank::GetAccount(int accountNumber){
-    for(int i = 0; i < this->accountsCount; i++){
+Account* Bank::GetAccount(int accountNumber) const {
+    for(int i = 0; i < this->accountsCapacity; i++){
         if(accounts[i] != nullptr && accounts[i]->GetNumber() == accountNumber) return accounts[i];
     }
 
@@ -41,7 +41,7 @@ Account* Bank::GetAccount(int accountNumber){
 Client* Bank::CreateClient(int c, std::string n){
     Client* client = new Client(c, n);
 
-    for(int i = 0; i < this->clientsCount; i++){
+    for(int i = 0; i < this->clientsCapacity; i++){
         if(clients[i] == nullptr){
             clients[i] = client;
             return client;
@@ -55,7 +55,7 @@ Client* Bank::CreateClient(int c, std::string n){
 }
 
 Account* Bank::StoreAccount(Account* account){
-    for(int i = 0; i < this->accountsCount; i++){
+    for(int i = 0; i < this->accountsCapacity; i++){
         if(accounts[i] == nullptr){
             accounts[i] = account;
             return account;
@@ -68,7 +68,7 @@ Account* Bank::StoreAccount(Account* account){
     return nullptr;
 }
 
-Account* Bank::CreateAccount(int n, Client* c){
+/*Account* Bank::CreateAccount(int n, Client* c){
     return StoreAccount(new Account(n, c));
 }
 
@@ -78,16 +78,16 @@ Account* Bank::CreateAccount(int n, Client* c, double ir){
 
 Account* Bank::CreateAccount(int n, Client* c, Client* p){
     return StoreAccount(new Account(n, c, p));
-}
+}*/
 
 Account* Bank::CreateAccount(int n, Client* c, Client* p, double ir){
     return StoreAccount(new Account(n, c, p, ir));
 }
 
-void Bank::PrintClients(){
+void Bank::PrintClients() const {
     std::cout << "List klientov:" << std::endl;
 
-    for(int i = 0; i < this->clientsCount; i++){
+    for(int i = 0; i < this->clientsCapacity; i++){
         if(clients[i] == nullptr) std::cout << "\t<prázdne>" << std::endl;
         else clients[i]->PrintClient();
     }
@@ -95,17 +95,17 @@ void Bank::PrintClients(){
     std::cout << std::endl;
 }
 
-void Bank::PrintAccounts(){
+void Bank::PrintAccounts() const {
     std::cout << "List účtov:" << std::endl;
 
-    for(int i = 0; i < this->accountsCount; i++){
+    for(int i = 0; i < this->accountsCapacity; i++){
         if(accounts[i] == nullptr) std::cout << "\t<prázdne>" << std::endl;
         else accounts[i]->PrintAccount();
     }
 }
 
 void Bank::AddInterest(){
-    for(int i = 0; i < this->accountsCount; i++){
+    for(int i = 0; i < this->accountsCapacity; i++){
         if(accounts[i] != nullptr) accounts[i]->AddInterest();
     }
 }

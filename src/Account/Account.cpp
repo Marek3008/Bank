@@ -1,54 +1,55 @@
 #include "Account.hpp"
 #include <iostream>
 
-Account::Account(int n, Client* c){
-    this->number = n;
-    this->owner = c;
-    this->partner = nullptr;
+
+int Account::objectsCount = 0;
+
+Account::Account(int n, Client* c, Client* p, double ir) : number(n), interestRate(ir), owner(c), partner(p)  {
+    Account::objectsCount++;
 }
 
-Account::Account(int n, Client* c, double ir){
-    this->number = n;
-    this->owner = c;
-    this->interestRate = ir;
-    this->partner = nullptr;
+Account::~Account(){
+    Account::objectsCount--;
 }
 
-Account::Account(int n, Client* c, Client* p){
-    this->number = n;
-    this->owner = c;
-    this->partner = p;
-}
+/*Account::Account(int n, Client* c) : Account(n, c, nullptr, 0.0) {}
 
-Account::Account(int n, Client* c, Client* p, double ir){
-    this->number = n;
-    this->owner = c;
-    this->partner = p;
-    this->interestRate = ir;
-}
+Account::Account(int n, Client* c, double ir) : Account(n, c, nullptr, ir) {}
 
-int Account::GetNumber(){
+Account::Account(int n, Client* c, Client* p) : Account(n, c, p, 0.0) {}*/
+
+int Account::GetNumber() const {
     return this->number;
 }
 
-double Account::GetBalance(){
+double Account::GetBalance() const {
     return this->balance;
 }
 
-double Account::GetInterestRate(){
+double Account::GetInterestRate() const {
     return this->interestRate;
 }
 
-Client* Account::GetOwner(){
+Client* Account::GetOwner() const {
     return this->owner;
 }
 
-Client* Account::GetPartner(){
+Client* Account::GetPartner() const {
     return this->partner;
 }
 
-bool Account::CanWithdraw(double balance){
-    if(balance <= this->balance) return true;
+int Account::GetObjectsCount(){
+    return Account::objectsCount;
+}
+
+Client* Account::SetPartner(Client* p){
+    this->partner = p;
+
+    return this->partner;
+}
+
+bool Account::CanWithdraw(double amount) const {
+    if(amount <= this->balance) return true;
 
     return false;
 }
@@ -57,15 +58,15 @@ void Account::Deposit(double balance){
     this->balance += balance;
 }
 
-void Account::Withdraw(double balance){
-    this->balance -= balance;
+void Account::Withdraw(double amount){
+    if(CanWithdraw(amount)) this->balance -= amount;
 }
 
 void Account::AddInterest(){
     this->balance += this->balance * this->interestRate;
 }
 
-void Account::PrintAccount(){
+void Account::PrintAccount() const {
     std::cout << "\tID: " << this->number << std::endl;
     std::cout << "\t\t" << "Vlastník: " << this->owner->GetCode() << " (" << this->owner->GetName() << ")" << std::endl;
     

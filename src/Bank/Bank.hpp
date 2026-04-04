@@ -4,27 +4,27 @@
 class Bank{
     private:
         Client** clients;
-        int clientsCount;
+        int clientsCapacity;
 
         Account** accounts;
-        int accountsCount;
+        int accountsCapacity;
 
         Account* StoreAccount(Account* account);
 
     public:
-        Bank(int clientsCount, int accountsCount);
+        Bank(int clientsCapacity, int accountsCapacity);
         ~Bank();
 
-        Client* GetClient(int clientNumber);
-        Account* GetAccount(int accountNumber);
+        Client* GetClient(int clientNumber) const;
+        Account* GetAccount(int accountNumber) const;
 
         Client* CreateClient(int c, std::string n);
-        Account* CreateAccount(int n, Client* c);
+        /*Account* CreateAccount(int n, Client* c);
         Account* CreateAccount(int n, Client* c, double ir);
-        Account* CreateAccount(int n, Client* c, Client* p);
-        Account* CreateAccount(int n, Client* c, Client* p, double ir);
+        Account* CreateAccount(int n, Client* c, Client* p);*/
+        Account* CreateAccount(int n, Client* c, Client* p = nullptr, double ir = 0.01);
 
-        void PrintClients();
-        void PrintAccounts();
+        void PrintClients() const;
+        void PrintAccounts() const;
         void AddInterest();
 };
