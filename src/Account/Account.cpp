@@ -8,6 +8,10 @@ Account::Account(int n, Client* c, Client* p, double ir) : number(n), interestRa
     Account::objectsCount++;
 }
 
+Account::Account(int n, Client* c, double ir, Client* p) : number(n), interestRate(ir), owner(c), partner(p) {
+    Account::objectsCount++;
+}
+
 Account::~Account(){
     Account::objectsCount--;
 }
@@ -46,6 +50,10 @@ Client* Account::SetPartner(Client* p){
     this->partner = p;
 
     return this->partner;
+}
+
+void Account::SetInterestRate(double ir){
+    this->interestRate = ir;
 }
 
 bool Account::CanWithdraw(double amount) const {

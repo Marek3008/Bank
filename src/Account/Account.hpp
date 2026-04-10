@@ -17,6 +17,7 @@ class Account{
         Account(int n, Client* c, double ir);
         Account(int n, Client* c, Client* p);*/
         Account(int n, Client* c, Client* p = nullptr, double ir = 0.01);
+        Account(int n, Client* c, double ir = 0.01, Client* p = nullptr);
         ~Account();
 
         int GetNumber() const;
@@ -27,6 +28,7 @@ class Account{
         static int GetObjectsCount();
 
         Client* SetPartner(Client* p);
+        void SetInterestRate(double ir);
 
         bool CanWithdraw(double balance) const;
 
