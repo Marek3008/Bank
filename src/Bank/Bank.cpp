@@ -1,10 +1,8 @@
 #include "Bank.hpp"
+#include "../Account/PartnerAccount/PartnerAccount.hpp"
 #include <iostream>
 
-Bank::Bank(int clientsCapacity, int accountsCapacity){
-    this->clientsCapacity = clientsCapacity;
-    this->accountsCapacity = accountsCapacity;
-
+Bank::Bank(int clientsCapacity, int accountsCapacity) : clientsCapacity(clientsCapacity), accountsCapacity(accountsCapacity){
     this->clients = new Client*[clientsCapacity]();
     this->accounts = new Account*[accountsCapacity]();
 }
@@ -80,8 +78,10 @@ Account* Bank::CreateAccount(int n, Client* c, Client* p){
     return StoreAccount(new Account(n, c, p));
 }*/
 
-Account* Bank::CreateAccount(int n, Client* c, Client* p, double ir){
-    return StoreAccount(new Account(n, c, p, ir));
+Account* Bank::CreateAccount(int n, Client* c, double ir, Client* p){
+    if (p != nullptr) return StoreAccount(new PartnerAccount(n, c, p, ir));
+
+    return StoreAccount(new Account(n, c, ir));
 }
 
 void Bank::PrintClients() const {

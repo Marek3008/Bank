@@ -6,28 +6,20 @@ class Account{
     private:
         int number;
         double balance = 0;
+        Client* owner;
         double interestRate;
         static int objectsCount;
-
-        Client* owner;
-        Client* partner;
-
+        
     public:
-        /*Account(int n, Client* c);
-        Account(int n, Client* c, double ir);
-        Account(int n, Client* c, Client* p);*/
-        Account(int n, Client* c, Client* p = nullptr, double ir = 0.01);
-        Account(int n, Client* c, double ir = 0.01, Client* p = nullptr);
-        ~Account();
+        Account(int n, Client* c, double ir = 0.01);
+        virtual ~Account();
 
         int GetNumber() const;
         double GetBalance() const;
         double GetInterestRate() const;
         Client* GetOwner() const;
-        Client* GetPartner() const;
         static int GetObjectsCount();
 
-        Client* SetPartner(Client* p);
         void SetInterestRate(double ir);
 
         bool CanWithdraw(double balance) const;
@@ -36,5 +28,5 @@ class Account{
         void Withdraw(double balance);
         void AddInterest();
 
-        void PrintAccount() const;
+        virtual void PrintAccount() const;
 };

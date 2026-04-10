@@ -1,6 +1,4 @@
 #include <iostream>
-#include "src/Client/Client.hpp"
-#include "src/Account/Account.hpp"
 #include "src/Bank/Bank.hpp"
 
 int main() {
@@ -16,6 +14,7 @@ int main() {
         if(a != nullptr) a->Deposit(100.0 * (i + 1));
     }
 
+    bank->CreateAccount(555, new Client(111, "ahoj"), 0.01, new Client(111, "cau"));
     bank->AddInterest();
 
     bank->PrintClients();
